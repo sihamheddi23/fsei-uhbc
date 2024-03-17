@@ -1,8 +1,11 @@
+import Image from 'next/image'
 import React from 'react'
 
 function FseiUhbcHeader() {
   return (
-    <div className='hidden md:flex h-[200px]'>FseiUhbcHeader</div>
+ 
+      <Image src={"/fsei-uhbc-header.svg"} className='w-[100%] hidden md:block'  width={100} height={100} alt='fsei uhbc header' />
+
   )
 }
 

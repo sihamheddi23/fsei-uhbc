@@ -7,6 +7,7 @@ import AboutUs from "@/components/MainSections/AboutUs";
 import Footer from "@/components/Footer";
 import Copyright from "@/components/Copyright";
 import FseiUhbcHeader from "@/components/Headers/FseiUhbcHeader";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <FseiUhbcHeader/>
       <UhbcHeader/>
       <FseiHeader/>
+      <Navbar/>
       <div className="my-8 mx-5 md:hidden">
         <MenuBtn/>
       </div>

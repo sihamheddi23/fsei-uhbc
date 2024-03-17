@@ -3,10 +3,10 @@ import Link from "next/link"
 
 function News() {
   return (
-    <div className="flex justify-center w-full text-white">
+    <div className="flex justify-center w-full text-white relative">
         <Image src={"/news.png"} width={90} height={100} className="w-[90%] h-[315px] md:w-[95%] md:h-[600px]" alt={"news"}/>
-        <div className='w-[90%] h-[321px] bg-[rgba(24,23,23,0.57)] absolute top-[400px] md:top-[199px] md:w-[95%] md:h-[600px]'></div>
-        <div className="w-[95%] absolute top-[400px] md:top-[200px]">
+        <div className='w-[90%] h-[315px] bg-[rgba(24,23,23,0.57)] absolute top-[1px] md:w-[95%] md:h-[600px]'></div>
+        <div className="w-[91%] md:w-[95%] absolute top-[1px]">
             <h4 className="bg-[#1b8bdd] pr-3 py-1 w-[110px] m-4 md:text-[20px]">آخر الأخبار</h4>
             <div className="flex flex-col items-center w-full justify-center gap-10  mt-[55px]">
               <h4 className="text-center text-[20px] md:text-[36px]">مسابقة الويب مع Cyber club</h4>
