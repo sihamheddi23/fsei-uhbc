@@ -4,7 +4,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div className='mt-10 text-white bg-[#031420]'>
+    <div className='w-full text-white bg-[#031420]'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-1'>
             <div className='flex flex-col md:flex-row justify-center md:justify-start items-center gap-4 py-4 px-2'>
                 <Image src={"/fsei.svg"} width={100} height={100} alt='fsei logo'/>
