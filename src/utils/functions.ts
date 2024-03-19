@@ -13,5 +13,5 @@ export const getClassName = (keyword: string, pathname: string, regexPattern?: s
           }
     }
 
-    return condition ? "border-b-2 border-b-blue-500" : "hover:text-blue-400"
+    return condition ? "font-semibold" : "hover:text-blue-400"
   }
