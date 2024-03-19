@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import MenuBtn from "@/components/Buttons/MenuBtn";
 import FseiHeader from "@/components/Headers/FseiHeader";
 import UhbcHeader from "@/components/Headers/UhbcHeader";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,10 +17,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  children
+}:any) {
+
   return (
     <html lang="en">
       <head>
@@ -32,9 +32,9 @@ export default function RootLayout({
         <FseiUhbcHeader />
         <UhbcHeader />
         <FseiHeader />
-        <Navbar />
+        <Navbar  />
         <div className="my-8 mx-5 md:hidden">
-          <MenuBtn />
+          <MenuBtn  />
         </div>
         {children}
         <Footer />

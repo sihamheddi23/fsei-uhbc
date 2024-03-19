@@ -1,19 +1,23 @@
 "use client";
+import { getClassName } from "@/utils/functions";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar(props:any) {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname()
+
   return (
     <div className="hidden my-11 mx-8 md:p-2 lg:p-4 md:flex md:gap-3 lg:gap-5 lg:text-[20px]">
       <Link
         href={"/"}
-        className="border-b-2 border-b-blue-500 hover:text-blue-400"
+        className={getClassName("/",pathname)}
       >
         الصفحة الرئيسية
       </Link>
       <div
-        className="relative"
+        className={getClassName("departement",pathname)+" relative"}
         onClick={() => {
           setIsOpen(!isOpen);
         }}>
@@ -24,27 +28,27 @@ function Navbar() {
         <span
           className={
             isOpen
-              ? "text-[15px] p-3 border border-gray-400 shadow-md shadow-slate-500 flex flex-col absolute top-10 justify-center w-[200px] z-40 bg-white"
+              ? "text-black text-[15px] p-3 border border-gray-400 shadow-md shadow-slate-500 flex flex-col absolute top-10 justify-center w-[200px] z-40 bg-white"
               : "hidden"
           }>
-          <Link href={"/"} className="hover:bg-blue-100 p-2">
+          <Link href={"/departement/informatics"} className="hover:bg-blue-100 p-2">
             قسم الاعلام الآلي
           </Link>
-          <Link href={"/"} className="hover:bg-blue-100 p-2">
+          <Link href={"/departement/maths"} className="hover:bg-blue-100 p-2">
             قسم الرياضيات
           </Link>
-          <Link href={"/"} className="hover:bg-blue-100 p-2">
+          <Link href={"/departement/physics"} className="hover:bg-blue-100 p-2">
             قسم الفيزياء
           </Link>
-          <Link href={"/"} className="hover:bg-blue-100 p-2">
+          <Link href={"/departement/chimics"} className="hover:bg-blue-100 p-2">
             قسم الكيمياء
           </Link>
         </span>
       </div>
-      <Link href={"/"} className="hover:text-blue-400">
+      <Link href={"/ads"}  className={getClassName("ads",pathname) }>
         صفحة الاعلانـــــــات
       </Link>
-      <Link href={"/"} className="hover:text-blue-400">
+      <Link href={"/#faculte-info"} className="hover:text-blue-400">
         {" "}
         معلومــــات عن الكلية
       </Link>
