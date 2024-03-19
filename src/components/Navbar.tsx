@@ -7,7 +7,7 @@ import { useState } from "react";
 function Navbar(props:any) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname()
-
+  
   return (
     <div className="hidden my-11 mx-8 md:p-2 lg:p-4 md:flex md:gap-3 lg:gap-5 lg:text-[20px]">
       <Link
