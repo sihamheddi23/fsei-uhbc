@@ -1,0 +1,31 @@
+const LINKS = [
+    
+]
+
+
+export const DEPARTEMENTS = {
+    'informatics': 'قسم الاعلام الآلي',
+    'maths': 'قسم الرياضيات',
+    'chimics': 'قسم الكيمياء',
+    'physics': 'قسم الفيزياء',
+  }
+
+  export const GRADES = {
+    'master': 'ماجستير',
+    'license':  'ليسانس',
+  }
+
+
+  export const LEVELS = {
+    '1': 'السنة الاولى',
+    '2': 'السنة الثانية',
+    '3': 'السنة الثالثة',
+  }
+
+  export const FIELDS = {
+    'networks': 'الشبكات',
+  }
+
+  export const MODULES = {
+    'os':'أنظمة التشغيل'
+  }
