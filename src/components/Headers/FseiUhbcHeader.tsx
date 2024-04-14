@@ -3,8 +3,10 @@ import React from 'react'
 
 function FseiUhbcHeader() {
   return (
- 
-      <Image src={"/fsei-uhbc-header.svg"} className='w-[100%] hidden md:block'  width={100} height={100} alt='fsei uhbc header' />
+    <div className='text-white items-center w-full md:flex md:justify-center md:gap-4 hidden  bg-[#0d111e] h-16 p-3'>
+      <Image src={"/uhbc.svg"} width={30} height={30} alt='uhbc logo' />
+      <h4>حـــــــامعة حســـيبة بن بــــــوعلي  ـ الشلف</h4>
+     </div>
 
   )
 }

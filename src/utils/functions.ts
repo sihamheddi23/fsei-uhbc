@@ -13,5 +13,5 @@ export const getClassName = (keyword: string, pathname: string, regexPattern?: s
           }
     }
 
-    return condition ? "font-semibold" : "hover:text-blue-400"
+    return condition ? "border-active-link " : "hover:text-blue-400"
   }

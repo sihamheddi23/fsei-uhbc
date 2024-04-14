@@ -12,3 +12,7 @@ body {
 ul {
   list-style-type: circle;
 }
+
+.border-active-link {
+  border-bottom: 2px solid rgb(6, 47, 72);
+}

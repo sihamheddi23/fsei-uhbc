@@ -16,7 +16,7 @@ function Footer() {
             <div className='grid grid-cols-1 md:grid-cols-3'>
                 <div className='flex items-center flex-col gap-1 md:mt-8'>
                     <Link href={"/"}>الصفحة الرئيسية</Link>
-                    <Link href={"/"}>صفحة الاعلانـــــــات</Link>
+                    <Link href={"/"}>معلومات عن الكلية </Link>
                     <Link href={"/"}>تسجيل الدخول</Link>
                 </div>
                 <div className='flex items-center my-4 flex-col gap-1'>

@@ -1,5 +1,6 @@
 "use client";
 import { getClassName } from "@/utils/functions";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -9,10 +10,14 @@ function Navbar(props:any) {
   const pathname = usePathname()
   
   return (
-    <div className="hidden my-11 mx-8 md:p-2 lg:p-4 md:flex md:gap-3 lg:gap-5 lg:text-[20px]">
+    <div className="hidden md:shadow-xl md:mb-8  md:px-6 md:p-3  md:flex items-center md:gap-3 lg:gap-5 lg:text-[18px]">
+      <div className="hidden md:flex md:gap-3 md:items-center">
+        <Image src={"/fsei.svg"} alt="logo" width={50} height={50} />
+        <h4 className="font-bold">كلية العلوم الدقيقة و الاعلام الآلي</h4>
+      </div>
       <Link
         href={"/"}
-        className={getClassName("/",pathname)}
+        className={"mr-4 " + getClassName("/",pathname)}
       >
         الصفحة الرئيسية
       </Link>
@@ -45,9 +50,6 @@ function Navbar(props:any) {
           </Link>
         </span>
       </div>
-      <Link href={"/ads"}  className={getClassName("ads",pathname) }>
-        صفحة الاعلانـــــــات
-      </Link>
       <Link href={"/#faculte-info"} className="hover:text-blue-400">
         {" "}
         معلومــــات عن الكلية

@@ -7,7 +7,8 @@ export const DEPARTEMENTS = {
     'informatics': 'قسم الاعلام الآلي',
     'maths': 'قسم الرياضيات',
     'chimics': 'قسم الكيمياء',
-    'physics': 'قسم الفيزياء',
+  'physics': 'قسم الفيزياء',
+    'faculty': 'الكلية',
   }
 
   export const GRADES = {
