@@ -1,8 +1,9 @@
 ## FSEI UHBC WESITE
 
-### Desktop version 
-<img src="figma/homepagedesktopversion (2).jpg"/>
+### Desktop version
 
-### Mobile version 
+Not completed yet
+
+### Mobile version
 
 <img src="figma/homepagemobilewersion.jpg"/>

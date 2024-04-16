@@ -12,8 +12,8 @@ function Navbar(props:any) {
   return (
     <div className="hidden md:shadow-xl md:mb-8  md:px-6 md:p-3  md:flex items-center md:gap-3 lg:gap-5 lg:text-[18px]">
       <div className="hidden md:flex md:gap-3 md:items-center">
-        <Image src={"/fsei.svg"} alt="logo" width={50} height={50} />
-        <h4 className="font-bold">كلية العلوم الدقيقة و الاعلام الآلي</h4>
+        <Image src={"/fsei.svg"} alt="logo" width={50} height={50} className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
+        <h4 className="font-bold text-[12px] lg:text-[18px]">كلية العلوم الدقيقة و الاعلام الآلي</h4>
       </div>
       <Link
         href={"/"}
@@ -54,8 +54,8 @@ function Navbar(props:any) {
         {" "}
         معلومــــات عن الكلية
       </Link>
-      <Link href={"/"} className="mr-auto hover:text-blue-400">
-        <i className="fa fa-unlock-alt"></i>
+      <Link href={"/login"} className={"mr-auto " + getClassName("/login",pathname)}>
+        <i className="fa fa-unlock-alt ml-1"></i>
         <span>تسجيل الدخول</span>
       </Link>
       <div className="flex gap-2 align-middle">
