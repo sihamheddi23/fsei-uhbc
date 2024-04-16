@@ -17,3 +17,11 @@ ul {
 .border-active-link {
   border-bottom: 2px solid rgb(6, 47, 72);
 }
+
+.ka-table {
+   width: 100%;
+}
+
+.ka-table th {
+  text-align: center;
+}
