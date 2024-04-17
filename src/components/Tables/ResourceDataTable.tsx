@@ -1,37 +1,24 @@
 "use client";
-import DataTable from 'react-data-table-component';
-
-const customStyles = {
-	headCells: {
-		style: {
-			backgroundColor: '#f8f8f8',
-		},
-	},
-}
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import { AgGridReact } from "ag-grid-react";
 
 interface ColumnType {
-	name?: string
-	selector?: (row: any) => any
-	sortable?: boolean,
-	cell?: (row: any) => any
+	headerName?: string
+	field?: string
+	cellRenderer?: (props: any) => any,
+	flex?: number
 }
 
 interface ResourceDataTableProps {
 	columns: ColumnType[],
-	data: any
+	data: any,
 }
 
 const ResourceDataTable: React.FC<ResourceDataTableProps> =  ({columns, data}) => {
-	return (
-		<div className='my-6'>
-			<DataTable
-				columns={columns}
-				data={data}
-				customStyles={customStyles}
-				pagination={true}
-		   />
-	    </div>
-	);
+	return <div className='ag-theme-alpine h-[200px] max-h-[400px] w-[100%] overflow-auto my-5'>
+		<AgGridReact rowData={data} columnDefs={columns} enableRtl={true}  />
+	</div>
 };
 
 export default ResourceDataTable
