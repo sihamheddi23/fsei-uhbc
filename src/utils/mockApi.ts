@@ -91,3 +91,27 @@ export const ads = [
         departement_name: "محمد",
     },
 ]
+
+export const submajors = [
+    { 
+        id: 1,
+        level: "L1",
+        sub_major_name: "info",
+        title: "جدول التوقيت السداسي الأول", 
+        document_url: "https://www.youtube.com/watch?v=0fZV5w5iQ2M",
+    },
+    { 
+        id: 2,
+        level: "L2",
+        sub_major_name: "info",
+        title: "جدول التوقيت السداسي الثاني", 
+        document_url: "https://www.youtube.com/watch?v=0fZV5w5iQ2M",
+    },
+    { 
+        id: 3,
+        level: "L3",
+        sub_major_name: "info",
+        title: "جدول التوقيت  اختبارات سداسي الاول", 
+        document_url: "https://www.youtube.com/watch?v=0fZV5w5iQ2M",
+    },
+]

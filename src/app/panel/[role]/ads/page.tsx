@@ -1,3 +1,5 @@
+"use client";
+import AdForm from "@/components/Resources/forms/AdForm";
 import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import { ads, users } from "@/utils/mockApi";
@@ -25,11 +27,13 @@ function Ads() {
       cellRenderer: (props: any) => {
         return (
           <a
+            className="text-blue-500 flex gap-1 items-center"
             href={props.data.document_url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {props.data.document_url}
+            <i className="fa fa-eye"></i>
+             <span>عرض الملف</span>
           </a>
         );
       }
@@ -44,7 +48,7 @@ function Ads() {
   return (
     <div>
       <ResourceManager columns={columns} data={ads} resourceName={"اعلان"}>
-        <UserForm />
+        <AdForm />
       </ResourceManager>
     </div>
   );

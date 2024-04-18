@@ -52,8 +52,8 @@ const PanelList:React.FC<PanelListProps> = (props) => {
           التخصصات{" "}
         </Link>
         <Link
-          href={`/panel/${props.role}/subjects`}
-          className={getClassName("subjects", pathname)}
+          href={`/panel/${props.role}/courses`}
+          className={getClassName("courses", pathname)}
         >
           {" "}
           الدروس و الملفات{" "}

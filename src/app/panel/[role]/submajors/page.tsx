@@ -1,21 +1,24 @@
-"use client";
-import AButton from "@/components/generic/Buttons/AButton";
-import ResourceModal from "@/components/generic/ResourceModal";
 import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import { users } from "@/utils/mockApi";
-import React, { useState } from "react";
+import React from "react";
 
 function Users() {
   const columns = [
-    {
-      headerName: "اسم المستخدم",
-      field: "username",
+   {
+      headerName: "id",
+      field: "id",
+      width: "50px",
+      suppressSizeToFit: true,
     },
-    { headerName: "الايمايل", field: "email" },
     {
-      headerName: "توع الحساب",
-      field: "role",
+      headerName: "اسم التخصص",
+      field: "name",
+    },
+    { headerName: "المستوى", field: "level" },
+    {
+      headerName: "الفرع ",
+      field: "departement_name",
     },
   ];
 
