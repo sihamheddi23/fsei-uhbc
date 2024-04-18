@@ -1,6 +1,10 @@
+"use client";
+import AButton from "@/components/generic/Buttons/AButton";
+import ResourceModal from "@/components/generic/ResourceModal";
 import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import { users } from "@/utils/mockApi";
+import React, { useState } from "react";
 
 function Users() {
   const columns = [

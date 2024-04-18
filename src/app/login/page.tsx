@@ -1,5 +1,5 @@
-import Submit from "@/components/Buttons/Submit";
-import Input from "@/components/Input";
+import Submit from "@/components/generic/Buttons/Submit";
+import Input from "@/components/generic/Input";
 
 function Login() {
   return (

@@ -1,4 +1,4 @@
-import Alert from '@/components/Alert'
+import Alert from '@/components/generic/Alert'
 import React from 'react'
 
 function Home() {

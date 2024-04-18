@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import AdvertisingItem from './SubSections/AdvertisingItem'
-import MainSectionHeader from '../Headers/MainSectionHeader'
+import MainSectionHeader from './SubSections/MainSectionHeader'
 
 function Advertising(props:any) {
   return (

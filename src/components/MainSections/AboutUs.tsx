@@ -1,5 +1,5 @@
 import React from "react";
-import MainSectionHeader from "../Headers/MainSectionHeader";
+import MainSectionHeader from "./SubSections/MainSectionHeader";
 
 function AboutUs() {
   return (

@@ -10,7 +10,7 @@ function Navbar(props:any) {
   const pathname = usePathname()
   
   return (
-    <div className="hidden md:shadow-xl md:mb-8  md:px-6 md:p-3  md:flex items-center md:gap-3 lg:gap-5 lg:text-[18px]">
+    <div className="hidden md:shadow-md md:mb-8  md:px-6 md:p-3  md:flex items-center md:gap-3 lg:gap-5 lg:text-[18px]">
       <div className="hidden md:flex md:gap-3 md:items-center">
         <Image src={"/fsei.svg"} alt="logo" width={50} height={50} className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
         <h4 className="font-bold text-[12px] lg:text-[18px]">كلية العلوم الدقيقة و الاعلام الآلي</h4>

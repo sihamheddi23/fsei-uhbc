@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Copyright from "@/components/Copyright";
-import FseiUhbcHeader from "@/components/Headers/FseiUhbcHeader";
-import Navbar from "@/components/Navbar";
-import MenuBtn from "@/components/Buttons/MenuBtn";
-import FseiHeader from "@/components/Headers/FseiHeader";
-import UhbcHeader from "@/components/Headers/UhbcHeader";
+import Footer from "@/components/navigation/Footer";
+import Copyright from "@/components/MainSections/SubSections/Copyright";
+import FseiUhbcHeader from "@/components/MainSections/SubSections/FseiUhbcHeader";
+import Navbar from "@/components/navigation/Navbar";
+import MenuBtn from "@/components/generic/Buttons/MenuBtn";
+import FseiHeader from "@/components/MainSections/SubSections/FseiHeader";
+import UhbcHeader from "@/components/MainSections/SubSections/UhbcHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 

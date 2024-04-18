@@ -3,6 +3,7 @@ type ResourceModalProps = {
   children: React.ReactNode;
   closeModal: () => void;
   needsAnswer?: boolean;
+  func?: () => void;
 };
 
 const ResourceModal: React.FC<ResourceModalProps> = ({
@@ -10,6 +11,7 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
   closeModal,
   title,
   needsAnswer = false,
+  func = () => {},
 }) => {
   return (
     <div onClick={closeModal} className="shadow absolute top-0 left-0 w-full h-[3000px] flex flex-col items-center pt-36  bg-[#242424b1] z-[3000]">
@@ -20,7 +22,7 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
         </div>
         <div>{children}</div>
         {needsAnswer && <div className="flex justify-between p-3 gap-2">
-          <button onClick={closeModal} className="text-xl w-1/2 bg-slate-900 text-white rounded-xl">نعم</button>
+          <button onClick={func} className="text-xl w-1/2 bg-slate-900 text-white rounded-xl">نعم</button>
           <button onClick={closeModal} className="text-xl  w-1/2 bg-red-600 text-white  rounded-xl">لا</button>
         </div>}
       </div>

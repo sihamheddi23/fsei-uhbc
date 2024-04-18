@@ -14,7 +14,7 @@ interface InputProps {
 const Input:React.FC<InputProps> = ({ labelTitle, type, name, id, placeholder }) => {
   return (
       <div className='flex flex-col gap-4'>
-          <label htmlFor="username"> {labelTitle} </label>
+          <label htmlFor={id}> {labelTitle} </label>
           <input
             type={type}
             name={name}
