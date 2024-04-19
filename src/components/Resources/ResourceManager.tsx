@@ -39,7 +39,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
 }) => {
   
   const columnAction = {
-    flex: 2,
+    width: "656px",
     cellRenderer: (props: CellActionButtonsProps) => (
       <ActionButtons
         onUpdateRow={() => onButtonActionClick(props.rowIndex, "UPDATE")}
@@ -47,8 +47,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
       />
     ),
   };
-  console.log(columns);
-  
+
   const [openAdd, setOpenAdd] = useState<boolean>(false);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);

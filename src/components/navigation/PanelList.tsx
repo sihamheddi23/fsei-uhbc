@@ -20,50 +20,49 @@ const PanelList:React.FC<PanelListProps> = (props) => {
           href={`/panel/${props.role}/users`}
           className={getClassName("users", pathname)}
         >
-          {" "}
-          المستخدمين{" "}
+          المستخدمين
         </Link>
         <Link
           href={`/panel/${props.role}/departements`}
           className={getClassName("departements", pathname)}
         >
-          {" "}
           أقسام الكلية
         </Link>
         <Link
           href={`/panel/${props.role}/teachers`}
           className={getClassName("teachers", pathname)}
         >
-          {" "}
-          المدرسين{" "}
+          المدرسين
         </Link>
         <Link
           href={`/panel/${props.role}/ads`}
           className={getClassName("ads", pathname)}
         >
-          {" "}
-          الاعلانات{" "}
+          الاعلانات
         </Link>
         <Link
           href={`/panel/${props.role}/submajors`}
           className={getClassName("submajors", pathname)}
         >
-          {" "}
-          التخصصات{" "}
+          التخصصات
+        </Link>
+         <Link
+          href={`/panel/${props.role}/subjects`}
+          className={getClassName("subjects", pathname)}
+        >
+           المقاييس المدروسة 
         </Link>
         <Link
           href={`/panel/${props.role}/courses`}
           className={getClassName("courses", pathname)}
         >
-          {" "}
-          الدروس و الملفات{" "}
+          الدروس و الملفات
         </Link>
         <Link
           href={`/panel/${props.role}/schedules`}
           className={getClassName("schedules", pathname)}
         >
-          {" "}
-          جدول التوقيت{" "}
+          جدول التوقيت
         </Link>
       </div>
     </div>

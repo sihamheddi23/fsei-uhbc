@@ -1,3 +1,4 @@
+import SubMajorForm from "@/components/Resources/forms/SubMajorForm";
 import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import { users } from "@/utils/mockApi";
@@ -15,17 +16,18 @@ function Users() {
       headerName: "اسم التخصص",
       field: "name",
     },
-    { headerName: "المستوى", field: "level" },
+    { headerName: "المستوى", field: "level", width: "90px", suppressSizeToFit: true },
     {
       headerName: "الفرع ",
       field: "departement_name",
+      width: "170px",
     },
   ];
 
   return (
     <div>
-      <ResourceManager columns={columns} data={users} resourceName={"مستخدم"}>
-        <UserForm />
+      <ResourceManager columns={columns} data={users} resourceName={"تخصص"}>
+        <SubMajorForm />
       </ResourceManager>
     </div>
   );

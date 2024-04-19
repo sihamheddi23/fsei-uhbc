@@ -1,3 +1,4 @@
+export const FACULTY_API_BASE_ENDPOINT = 'https://fsei-uhbc-rest-api.onrender.com'
 const LINKS = [
     
 ]

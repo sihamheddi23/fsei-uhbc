@@ -1,6 +1,5 @@
 "use client";
 import ScheduleForm from "@/components/Resources/forms/ScheduleForm";
-import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import { submajors, users } from "@/utils/mockApi";
 import React from "react";
