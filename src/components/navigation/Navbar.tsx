@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import cookie from "js-cookie";
 
 function Navbar(props:any) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname()
+  const token = cookie.get("token")
   
   return (
     <div className="hidden md:shadow-md md:mb-8  md:px-6 md:p-3  md:flex items-center md:gap-3 lg:gap-5 lg:text-[18px]">
@@ -54,10 +56,14 @@ function Navbar(props:any) {
         {" "}
         معلومــــات عن الكلية
       </Link>
-      <Link href={"/login"} className={"mr-auto " + getClassName("/login",pathname)}>
-        <i className="fa fa-unlock-alt ml-1"></i>
-        <span>تسجيل الدخول</span>
-      </Link>
+      {
+        !token && (
+          <Link href={"/login"} className={"mr-auto " + getClassName("/login",pathname)}>
+            <i className="fa fa-unlock-alt ml-1"></i>
+            <span>تسجيل الدخول</span>
+         </Link>
+        ) 
+      }
       <div className="flex gap-2 align-middle">
         <span>تغيير اللغة </span>
         <i className="fa fa-sort-desc"></i>
