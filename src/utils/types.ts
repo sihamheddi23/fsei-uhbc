@@ -4,5 +4,7 @@ export type FormError = {
 
 export type LoginOutput = {
     token: string,
-    role: string
+    role: Role
 }
+
+export type Role = "Admin" | "Teacher" | "HeadDepartement";

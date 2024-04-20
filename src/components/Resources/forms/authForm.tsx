@@ -3,15 +3,16 @@ import { login } from "@/api-fetchers/auth";
 import Form from "@/components/generic/Form";
 import Input from "@/components/generic/Input";
 import { FormError } from "@/utils/types";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import AuthContext from "@/lib/context";
+import { toast } from "react-toastify";
 
 function AuthForm() {
   const [usernameOrEmail, setUsernameOrEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<FormError>({});
-  const router = useRouter()
+  const {setRole, setToken} = useContext(AuthContext)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.trim().length) {
@@ -38,25 +39,44 @@ function AuthForm() {
       const data:any = await login(usernameOrEmail, password);
       console.log(data);
       if (data) {
-         if (!data?.error) setErrors({});
-         else {
-            if(data.statusCode === 401) {
-              setErrors((prev) => ({ ...prev, form: ["اسم المستخدم او الايميل غير صحيح"] }));
-              setTimeout(() => {
-                setErrors((prev) => ({ ...prev, form: [] }));
-              },3000)
-            }
+        if (!data?.error) {
+          setErrors({});
+          toast.success("جاري تسجيل الدخول", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          if (data.statusCode === 401) {
+            setErrors((prev) => ({
+              ...prev,
+              form: ["اسم المستخدم او الايميل غير صحيح"],
+            }));
+            setTimeout(() => {
+              setErrors((prev) => ({ ...prev, form: [] }));
+            }, 3000);
+          }
         }
 
         const { token, role } = data;
-        if (token && role) {
+        if(token && role) {
+          setToken(token);
+          setRole(role);
+          cookies.set("role", role);
           cookies.set("token", token);
-          router.push(`/panel/${role}`);
+          setTimeout(() => {
+            window.location.href = `/panel/${role}`;
+          }, 3000);
         }
-
+      }
       }
     }
-  };
+
   return (
     <div>
       <Form method="POST" onSubmit={onSubmit} errors={errors.form}>
