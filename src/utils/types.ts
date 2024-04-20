@@ -8,3 +8,10 @@ export type LoginOutput = {
 }
 
 export type Role = "Admin" | "Teacher" | "HeadDepartement";
+
+export type UserInput = {
+    username: string,
+    password?: string,
+    role: Role,
+    email: string
+}

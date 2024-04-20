@@ -85,9 +85,9 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
     if (variant === "DELETE") setOpenDelete(false);
   };
 
-  const onSubmitAdd = () => closeModal("ADD")
-  const onSubmitUpdate = () => closeModal("UPDATE")
-  const onSubmitDelete = () => closeModal("DELETE")
+  const onSubmitAdd = async () => closeModal("ADD")
+  const onSubmitUpdate = async () => closeModal("UPDATE")
+  const onSubmitDelete = async () => closeModal("DELETE")
 
   return (
     <div>
@@ -95,7 +95,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
         <ResourceModal
         title={`اضافة ${resourceName}`}
         closeModal={() => closeModal("ADD")}>
-          <Form onSubmit={onSubmitAdd}>
+          <Form method="POST" onSubmit={onSubmitAdd}>
             {children}
           </Form>
         </ResourceModal>
@@ -105,7 +105,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           title={`تعديل ${resourceName}`}
           closeModal={() => closeModal("UPDATE")}
         >
-          <Form onSubmit={onSubmitUpdate}>
+          <Form method="PUT" onSubmit={onSubmitUpdate}>
              {children}
           </Form>
         </ResourceModal>

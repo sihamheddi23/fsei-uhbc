@@ -15,6 +15,10 @@ function Users() {
     },
   ];
 
+  const Addrow = (row: any) => {
+    
+  }
+
   return (
     <div>
       <ResourceManager columns={columns} data={users} resourceName={"مستخدم"}>

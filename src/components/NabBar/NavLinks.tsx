@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DropDownDep from "./DropDownDep";
 import { getClassName } from "@/utils/functions";
 import { usePathname } from "next/navigation";
@@ -12,7 +12,17 @@ import 'react-toastify/dist/ReactToastify.css';
 function NavLinks() {
   const pathname = usePathname();
   const { token, role, onClear } = useContext(AuthContext);  
-    
+  const [links, setlinks] = useState<string[]>([])
+  
+  useEffect(() => {
+    if (token && role) {
+       setlinks(["panel","logout"])
+    }
+    else {
+      setlinks(["login"])
+    }
+  }, [token, role])
+  
   const onSignout = () => {
     if (token) {
       const data: any = logout(token);
@@ -50,15 +60,16 @@ function NavLinks() {
         <DropDownDep />
       </div>
       <div className="flex items-center  md:gap-3">
-        {!token  ? (
+        { links.includes("login") && (
           <Link
             href={"/login"}
             className={"mr-auto " + getClassName("/login", pathname)}
           >
             <i className="fa fa-unlock-alt ml-1"></i>
             <span>تسجيل الدخول</span>
-          </Link>
-        ) : (
+          </Link> )
+        } 
+        { links.includes("panel") && links.includes("logout") && (
           <div className="flex gap-2 items-center ">
             <button
               onClick={onSignout}
@@ -73,8 +84,8 @@ function NavLinks() {
             >
               لوحة التحكم
             </Link>
-          </div>
-        )}
+          </div> )
+        }
         <div className="flex gap-2 align-middle">
           <span>تغيير اللغة </span>
           <i className="fa fa-sort-desc"></i>
