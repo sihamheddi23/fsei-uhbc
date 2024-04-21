@@ -10,13 +10,14 @@ interface SelectProps {
     id: string
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
     options: Option[]
+    name: string
 }
 
-const Select:React.FC<SelectProps> = ({ labelTitle, id, onChange, options})=>{
+const Select:React.FC<SelectProps> = ({name, labelTitle, id, onChange, options})=>{
   return (
       <div className='my-2 flex flex-col gap-4 w-full'>
           <label htmlFor={id}> {labelTitle} </label>
-          <select className="border border-gray-300 rounded-xl p-2 outline-none">
+          <select name={name} className="border border-gray-300 rounded-xl p-2 outline-none">
               {
                 options.map((option, index)=>{
                   return (

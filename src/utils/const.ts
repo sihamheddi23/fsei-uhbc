@@ -5,7 +5,7 @@ const LINKS = [
 
 export const ROLES = {
     'Admin': 'الادمين',
-    'Teacher': 'الاساتدة',
+    'Teacher': 'استاد',
     'HeadDepartement': 'رئيس القسم',
 }
 

@@ -9,7 +9,8 @@ export type LoginOutput = {
 
 export type Role = "Admin" | "Teacher" | "HeadDepartement";
 
-export type UserInput = {
+export type User = {
+    _id?: number,
     username: string,
     password?: string,
     role: Role,

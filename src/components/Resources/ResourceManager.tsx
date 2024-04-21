@@ -4,9 +4,11 @@ import ResourceModal from "@/components/generic/ResourceModal";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridReact } from "ag-grid-react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ActionButtons from "../generic/Buttons/ActionButtons";
 import Form from "../generic/Form";
+import AuthContext from "@/lib/context";
+import { toast } from "react-toastify";
 
 interface ColumnType {
   headerName?: string;
@@ -22,9 +24,9 @@ interface ResourceManagerProps {
   data: any;
   resourceName: string;
   children: React.ReactNode;
-  Addrow?: (row: any) => void;
-  EditRow?: (row: any) => void;
-  DeleteRow?: (row: any) => void;
+  addrow: (row: any, token: string) => Promise<any>;
+  editRow: (token: string,row: any,id: string | number) => Promise<any>;
+  deleteRow: (token: string, row: any, id: string | number) => Promise<any>;
 }
 
 interface CellActionButtonsProps {
@@ -35,7 +37,10 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
   columns,
   data,
   resourceName,
-  children
+  children,
+  addrow,
+  editRow,
+  deleteRow,
 }) => {
   
   const columnAction = {
@@ -51,29 +56,29 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
   const [openAdd, setOpenAdd] = useState<boolean>(false);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [rowSelectedIndex, setRowSelectedIndex] = useState<number>(-1);
   const [rowsData, setRowsData] = useState([]);
   const [columnsDefs, setColumnsDefs] = useState<ColumnType[]>([]);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setColumnsDefs([...columns, columnAction]);
-      setRowsData(data);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
+    setColumnsDefs([...columns, columnAction]);
+    setRowsData(data);
+  }, [data]);
+  
   const onButtonActionClick = (id: number, action: "UPDATE" | "DELETE") => {
     console.log(`${action} ${id}`);
-    setRowSelectedIndex(id);
-    openModal(action);
+    openModal(action, id);
   };
 
-  const openModal = (variant: "ADD" | "UPDATE" | "DELETE") => {
+  const openModal = (variant: "ADD" | "UPDATE" | "DELETE", rowIndex: number = -1) => {
     document.body.style.overflow = "hidden";
 
     if (variant === "ADD") setOpenAdd(true);
-    if (variant === "UPDATE") setOpenEdit(true);
+    if (variant === "UPDATE") {
+      const formEdit = document.getElementById("form");
+      console.log(formEdit);
+      setOpenEdit(true);
+    }
     if (variant === "DELETE") setOpenDelete(true);
   };
 
@@ -85,9 +90,54 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
     if (variant === "DELETE") setOpenDelete(false);
   };
 
-  const onSubmitAdd = async () => closeModal("ADD")
-  const onSubmitUpdate = async () => closeModal("UPDATE")
-  const onSubmitDelete = async () => closeModal("DELETE")
+  const onSubmitAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!token) {
+        window.location.href = "/login";
+      } else {
+        let formData: { [name: string]: { value: any } } = {};
+        const form: any = e.currentTarget.childNodes.item(0).childNodes;
+        form.forEach((item: any) => {
+          const name: string = item.childNodes.item(1).name;
+          const value: any = item.childNodes.item(1).value;
+          formData[name] = value;
+        });
+        const result = await addrow(formData, token);
+        console.log(result.error);
+        
+        if (result.error) {
+            console.log(result?.message);
+            toast.error(result?.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+          });
+        }
+        else {
+            closeModal("ADD");
+            toast.success("لقد تمت العملية بنجاح", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+            });
+          window.location.reload();
+        }
+      }
+
+  }
+
+  const onSubmitUpdate = async () => {closeModal("UPDATE")}
+  const onSubmitDelete = async () => {closeModal("DELETE")}
 
   return (
     <div>
@@ -105,8 +155,8 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           title={`تعديل ${resourceName}`}
           closeModal={() => closeModal("UPDATE")}
         >
-          <Form method="PUT" onSubmit={onSubmitUpdate}>
-             {children}
+          <Form method="PUT" id="formEdit" onSubmit={onSubmitUpdate}>
+              {children}
           </Form>
         </ResourceModal>
       )}

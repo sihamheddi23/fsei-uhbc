@@ -21,6 +21,7 @@ const Input: React.FC<InputProps> = ({
   errors,
   onChange,
   value,
+  required = false,
 }) => {
   
   const errorMessage = errors?.join(", ");
@@ -36,6 +37,7 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        required={required}
       />
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
     </div>
