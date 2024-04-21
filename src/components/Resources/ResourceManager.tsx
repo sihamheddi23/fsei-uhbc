@@ -59,14 +59,31 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
   const [rowsData, setRowsData] = useState([]);
   const [columnsDefs, setColumnsDefs] = useState<ColumnType[]>([]);
   const { token } = useContext(AuthContext);
+  const [inputs, setInputs] = useState<HTMLDivElement | null>(null)
+  const [rowIndexSelected, setrowIndexSelected] = useState(-1)
 
   useEffect(() => {
     setColumnsDefs([...columns, columnAction]);
     setRowsData(data);
   }, [data]);
   
+  useEffect(() => {
+    if (inputs) {
+      const items: any = inputs.childNodes.item(0)
+      const inputList = items.querySelectorAll("input")
+      const selectList = items.querySelectorAll("select")
+      const elements = [...inputList, ...selectList]
+      elements[0].value = "skssks"
+      for (let i = 0; i < elements.length; i++) {
+        if (elements[i].nodeName === "SELECT") {
+           
+        }
+        
+      }
+    }
+  }, [inputs]);
+
   const onButtonActionClick = (id: number, action: "UPDATE" | "DELETE") => {
-    console.log(`${action} ${id}`);
     openModal(action, id);
   };
 
@@ -75,9 +92,8 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
 
     if (variant === "ADD") setOpenAdd(true);
     if (variant === "UPDATE") {
-      const formEdit = document.getElementById("form");
-      console.log(formEdit);
-      setOpenEdit(true);
+          setrowIndexSelected(rowIndex)
+          setOpenEdit(true);
     }
     if (variant === "DELETE") setOpenDelete(true);
   };
@@ -138,7 +154,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
 
   const onSubmitUpdate = async () => {closeModal("UPDATE")}
   const onSubmitDelete = async () => {closeModal("DELETE")}
-
+  
   return (
     <div>
       {openAdd && (
@@ -155,8 +171,10 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           title={`تعديل ${resourceName}`}
           closeModal={() => closeModal("UPDATE")}
         >
-          <Form method="PUT" id="formEdit" onSubmit={onSubmitUpdate}>
-              {children}
+          <Form method="PUT" onSubmit={onSubmitUpdate}>
+              <div ref={(node)=>setInputs(node)}>
+                {children}
+              </div>
           </Form>
         </ResourceModal>
       )}
