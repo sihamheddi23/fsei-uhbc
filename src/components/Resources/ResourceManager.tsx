@@ -26,7 +26,7 @@ interface ResourceManagerProps {
   children: React.ReactNode;
   addrow: (row: any, token: string) => Promise<any>;
   editRow: (token: string,row: any,id: string | number) => Promise<any>;
-  deleteRow: (token: string, row: any, id: string | number) => Promise<any>;
+  deleteRow: (token: string, id: string | number) => Promise<any>;
 }
 
 interface CellActionButtonsProps {
@@ -56,11 +56,12 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
   const [openAdd, setOpenAdd] = useState<boolean>(false);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [rowsData, setRowsData] = useState([]);
+  const [rowsData, setRowsData] = useState<any>([]);
   const [columnsDefs, setColumnsDefs] = useState<ColumnType[]>([]);
   const { token } = useContext(AuthContext);
   const [inputs, setInputs] = useState<HTMLDivElement | null>(null)
   const [rowIndexSelected, setrowIndexSelected] = useState(-1)
+  const [formEdit, setFormEdit] = useState()
 
   useEffect(() => {
     setColumnsDefs([...columns, columnAction]);
@@ -72,13 +73,26 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
       const items: any = inputs.childNodes.item(0)
       const inputList = items.querySelectorAll("input")
       const selectList = items.querySelectorAll("select")
-      const elements = [...inputList, ...selectList]
-      elements[0].value = "skssks"
+      const elements:any = [...inputList, ...selectList]
+      setFormEdit(elements)
+
       for (let i = 0; i < elements.length; i++) {
-        if (elements[i].nodeName === "SELECT") {
-           
+        if (elements[i].nodeName === "INPUT") {
+          const name: string = elements[i].name
+          if (rowsData[rowIndexSelected][name]) {
+            elements[i].value = rowsData[rowIndexSelected][name]
+          }
         }
-        
+        if (elements[i].nodeName === "SELECT") {
+          const name: string = elements[i].name
+          const childNodes = elements[i].childNodes
+          for (let j = 0; j < childNodes.length; j++) {
+            const element = childNodes[j];
+            if(element.textContent === rowsData[rowIndexSelected][name]) {
+              elements[i].childNodes.item(j).selected = true
+            }
+          }
+        }
       }
     }
   }, [inputs]);
@@ -95,7 +109,10 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           setrowIndexSelected(rowIndex)
           setOpenEdit(true);
     }
-    if (variant === "DELETE") setOpenDelete(true);
+    if (variant === "DELETE") {
+       setrowIndexSelected(rowIndex)
+       setOpenDelete(true);
+    }
   };
 
   const closeModal = (variant: "ADD" | "UPDATE" | "DELETE") => {
@@ -123,7 +140,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
         
         if (result.error) {
             console.log(result?.message);
-            toast.error(result?.message, {
+            toast.error(result?.message.join(" , "), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: true,
@@ -152,8 +169,85 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
 
   }
 
-  const onSubmitUpdate = async () => {closeModal("UPDATE")}
-  const onSubmitDelete = async () => {closeModal("DELETE")}
+  const onSubmitUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!token) {
+      window.location.href = "/login";
+    } else {
+        const formData: { [name: string]: { value: any } } = {};
+        const form: any = formEdit;
+        form.forEach((item: any) => {
+          const name: string = item.name;
+          const value: any = item.value;
+          formData[name] = value;
+        });
+        const result = await editRow(
+          token,
+          formData,
+          rowsData[rowIndexSelected]._id
+        );
+        if (result.error) {
+            toast.error(result?.message.join(" , "), {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            });
+        } else {
+            closeModal("UPDATE");
+            toast.success("لقد تمت العملية بنجاح", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            });
+            window.location.reload();
+        }
+    }
+  }
+
+  const onSubmitDelete = async () => {
+    if (!token) {
+      window.location.href = "/login";
+    }
+    else {
+      const result = await deleteRow(token, rowsData[rowIndexSelected]._id)
+      if (!result.error) {
+        closeModal("DELETE")
+        toast.success("لقد تمت العملية بنجاح", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+        window.location.reload();
+      }
+      else {
+        toast.error(result?.message.join(" , "), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    }
+  }
   
   return (
     <div>
@@ -171,7 +265,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           title={`تعديل ${resourceName}`}
           closeModal={() => closeModal("UPDATE")}
         >
-          <Form method="PUT" onSubmit={onSubmitUpdate}>
+          <Form method="PATCH" onSubmit={onSubmitUpdate}>
               <div ref={(node)=>setInputs(node)}>
                 {children}
               </div>
@@ -185,7 +279,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           needsAnswer={true}
           func={onSubmitDelete}
         >
-          <p className="p-3">هل تريد حذف هذا {resourceName} ؟</p>
+          <p className="p-3">هل تريد حذف هذا {resourceName} {rowsData[rowIndexSelected][columnsDefs[0].field as string]} ؟</p>
         </ResourceModal>
       )}
       <div className="w-full h-full  px-5 py-5">

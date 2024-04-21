@@ -53,7 +53,7 @@ export async function getUser(token: string): Promise<any> {
 export async function updateUser(token: string, input: User, id: string | number): Promise<any> {
    const UPDATE_USER_ENDPOINT = `${USER_ENDPOINT}/${id}`
     const response = await fetch(UPDATE_USER_ENDPOINT, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,

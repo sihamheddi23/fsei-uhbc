@@ -1,5 +1,5 @@
 "use client";
-import { addUser, getUser, updateUser } from "@/api-fetchers/auth";
+import { addUser, deleteUser, getUser, updateUser } from "@/api-fetchers/auth";
 import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import AuthContext from "@/lib/context";
@@ -43,7 +43,7 @@ function Users() {
   return (
     <div>
       <ResourceManager columns={columns} data={data} addrow={addUser}
-         editRow={updateUser} deleteRow={updateUser} resourceName={"مستخدم"}>
+         editRow={updateUser} deleteRow={deleteUser} resourceName={"مستخدم"}>
         <UserForm />
       </ResourceManager>
     </div>
