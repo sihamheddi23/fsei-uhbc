@@ -6,3 +6,7 @@ export const USER_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/auth/users`;
 export const ADD_USER_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/auth/add-user`;
 
 export const GET_TEACHERS_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/teacher`;
+
+export const GET_DEPARTEMNTS_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/departement`;
+
+export const GET_SUBMAJORS_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/sub-major`;

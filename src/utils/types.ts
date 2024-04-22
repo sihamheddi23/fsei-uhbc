@@ -8,6 +8,7 @@ export type LoginOutput = {
 }
 
 export type Role = "Admin" | "Teacher" | "HeadDepartement";
+export type Grade = "MAB" | "MAA" | "MCA" | "MBA";
 
 export type User = {
     _id?: number,
@@ -15,4 +16,12 @@ export type User = {
     password?: string,
     role: Role,
     email: string
+}
+
+export type Teacher = {
+    _id?: number,
+    first_name: string,
+    last_name: string,
+    grade: Grade,
+    user_id: number
 }

@@ -1,8 +1,12 @@
+"use client";
+import { getDepartements } from "@/api-fetchers/departements";
+import { getSubMajors } from "@/api-fetchers/sub-majors";
+import Alert from "@/components/generic/Alert";
 import SubMajorForm from "@/components/Resources/forms/SubMajorForm";
-import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
+import AuthContext from "@/lib/context";
 import { users } from "@/utils/mockApi";
-import React from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 
 function Users() {
   const columns = [
@@ -24,13 +28,39 @@ function Users() {
     },
   ];
 
-  return (
-    <div>
-      <ResourceManager columns={columns} data={users} resourceName={"تخصص"}>
-        <SubMajorForm />
-      </ResourceManager>
-    </div>
-  );
+  const { token } = useContext(AuthContext)
+  const [enableToEdit, setenableToEdit] = useState<Boolean>(false)
+  const [isLoading, setisLoading] = useState(true)
+
+  useLayoutEffect(() => {
+    if (token) getDepartements().then((departement) => {
+        setisLoading(false)
+         if (departement.length > 0) {
+            setenableToEdit(true)
+        }
+         else {
+            setenableToEdit(false)
+        }
+      })
+  }, [])
+  
+  if (isLoading) {
+    return (<div className="mx-4 mt-5">
+      <Alert text={' يرجى الانتظار'} variants='INFO' />
+    </div>)
+  }
+  else {
+    return (
+      <div>
+        {enableToEdit === false ? <div className="mx-4 mt-5">
+          <Alert text={' لا يمكنك اضافة التخصصات  يرجى اضافة الفروع'} variants='INFO' />
+        </div> :
+          <ResourceManager columns={columns} data={users} resourceName={"تخصص"}>
+            <SubMajorForm />
+          </ResourceManager>}
+      </div>
+    );
+  }
 }
 
 export default Users;

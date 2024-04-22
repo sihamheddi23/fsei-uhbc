@@ -73,9 +73,8 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
       const items: any = inputs.childNodes.item(0)
       const inputList = items.querySelectorAll("input")
       const selectList = items.querySelectorAll("select")
-      const elements:any = [...inputList, ...selectList]
+      const elements: any = [...inputList, ...selectList]
       setFormEdit(elements)
-
       for (let i = 0; i < elements.length; i++) {
         if (elements[i].nodeName === "INPUT") {
           const name: string = elements[i].name
@@ -86,6 +85,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
         if (elements[i].nodeName === "SELECT") {
           const name: string = elements[i].name
           const childNodes = elements[i].childNodes
+          console.log(i," -- ",childNodes);
           for (let j = 0; j < childNodes.length; j++) {
             const element = childNodes[j];
             if(element.textContent === rowsData[rowIndexSelected][name]) {
@@ -266,7 +266,7 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           closeModal={() => closeModal("UPDATE")}
         >
           <Form method="PATCH" onSubmit={onSubmitUpdate}>
-              <div ref={(node)=>setInputs(node)}>
+              <div ref={(node)=> setInputs(node)}>
                 {children}
               </div>
           </Form>
