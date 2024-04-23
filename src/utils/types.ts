@@ -25,3 +25,9 @@ export type Teacher = {
     grade: Grade,
     user_id: number
 }
+
+export type Departement = {
+    name: string
+    head_departement_id: string
+    head_departement_name?: string
+}

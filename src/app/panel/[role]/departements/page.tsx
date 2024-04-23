@@ -1,9 +1,11 @@
 "use client"
-import { getTeachers } from "@/api-fetchers/teacher";
+import { addDepartement, deleteDepartement, getDepartements, updateDepartement } from "@/api-fetchers/departements";
+import { getHeadDepartmentTeachers } from "@/api-fetchers/teacher";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import TeacherForm from "@/components/Resources/forms/TeacherForm";
 import Alert from "@/components/generic/Alert";
 import AuthContext from "@/lib/context";
+import { Departement } from "@/utils/types";
 import { useContext, useLayoutEffect, useState } from "react";
 
  
@@ -20,14 +22,19 @@ function Departements() {
   const { token } = useContext(AuthContext)
   const [enableToEdit, setenableToEdit] = useState<Boolean>(false)
   const [isLoading, setisLoading] = useState(true)
+  const [data, setdata] = useState<Departement[]>([])
 
   useLayoutEffect(() => {
-    if (token) getTeachers().then((teachers) => {
-        setisLoading(false)
+    if (token) getHeadDepartmentTeachers().then((teachers) => {
+         setisLoading(false)
+         console.log(teachers);
          if (teachers.length > 0) {
+            getDepartements().then((departement) => {
+            setdata(departement)
             setenableToEdit(true)
+          })
         }
-         else {
+        else {
             setenableToEdit(false)
         }
       })
@@ -42,9 +49,9 @@ function Departements() {
       return (
     <div>
       {enableToEdit === false ? <div className="mx-4 mt-5">
-        <Alert text={' لا يمكنك اضافة الفروع  يرجى اضافة المدرسين'} variants='INFO' />
+        <Alert text={' لا يمكنك اضافة الفروع  يرجى اضافة المدرسين الذين يمتلكون حساب رئيس الفرع'} variants='INFO' />
       </div> :
-        <ResourceManager columns={columns} data={teachers} resourceName={"أستاذ"}>
+        <ResourceManager columns={columns} data={data} addrow={addDepartement} editRow={updateDepartement} deleteRow={deleteDepartement} resourceName={"الفرع"}>
           <TeacherForm />
         </ResourceManager>
       }

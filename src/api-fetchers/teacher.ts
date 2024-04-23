@@ -1,8 +1,14 @@
-import { GET_TEACHERS_ENDPOINT } from "@/utils/endpoints"
+import { GET_HEAD_DEPARTEMNTS_ENDPOINT, GET_TEACHERS_ENDPOINT } from "@/utils/endpoints"
 import { Teacher } from "@/utils/types"
 
 export async function getTeachers(limit?: number): Promise<any> {
     const response = await fetch(GET_TEACHERS_ENDPOINT+`?limit=${limit}`)
+    const data = await response.json()
+    return data
+}
+
+export async function getHeadDepartmentTeachers(): Promise<any> {
+    const response = await fetch(GET_HEAD_DEPARTEMNTS_ENDPOINT)
     const data = await response.json()
     return data
 }

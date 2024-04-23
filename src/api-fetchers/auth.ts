@@ -38,7 +38,7 @@ export async function addUser(input:User, token: string): Promise<any> {
     return data
 }
 
-export async function getUser(token: string, limit?: number): Promise<any> {
+export async function getUser(token: string, limit: number=30): Promise<any> {
     const response = await fetch(USER_ENDPOINT+`?limit=${limit}`, {
             method: "GET",
             headers: {

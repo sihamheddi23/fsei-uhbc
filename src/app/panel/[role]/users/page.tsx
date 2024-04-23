@@ -29,6 +29,7 @@ function Users() {
   useEffect(() => {
     if (token) {
       getUser(token).then((users) => {
+        console.log(users);
         const entries = users.map((user:User) => {
           return {
             ...user,

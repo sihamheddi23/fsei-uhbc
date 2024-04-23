@@ -8,7 +8,7 @@ import ResourceManager from "@/components/Resources/ResourceManager";
 import AuthContext from "@/lib/context";
 import { GRADES_TEACHER } from "@/utils/const";
 import { Teacher } from "@/utils/types";
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 
 
 function Teachers() {
