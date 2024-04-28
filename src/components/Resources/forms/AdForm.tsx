@@ -12,6 +12,7 @@ function AdForm() {
   return (
     <div>
       <Input
+        errors={[]}
         labelTitle=" العنوان"
         type="text"
         name="title"

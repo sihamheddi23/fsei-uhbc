@@ -2,7 +2,7 @@
 import { addDepartement, deleteDepartement, getDepartements, updateDepartement } from "@/api-fetchers/departements";
 import { getHeadDepartmentTeachers } from "@/api-fetchers/teacher";
 import ResourceManager from "@/components/Resources/ResourceManager";
-import TeacherForm from "@/components/Resources/forms/TeacherForm";
+import DepartementForm from "@/components/Resources/forms/DepartementForm";
 import Alert from "@/components/generic/Alert";
 import AuthContext from "@/lib/context";
 import { Departement } from "@/utils/types";
@@ -52,7 +52,7 @@ function Departements() {
         <Alert text={' لا يمكنك اضافة الفروع  يرجى اضافة المدرسين الذين يمتلكون حساب رئيس الفرع'} variants='INFO' />
       </div> :
         <ResourceManager columns={columns} data={data} addrow={addDepartement} editRow={updateDepartement} deleteRow={deleteDepartement} resourceName={"الفرع"}>
-          <TeacherForm />
+          <DepartementForm />
         </ResourceManager>
       }
     </div>

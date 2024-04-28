@@ -1,10 +1,10 @@
 "use client";
+import { getAds, create_ads, delete_ads, update_ads } from "@/api-fetchers/ads";
 import { getDepartements } from "@/api-fetchers/departements";
 import Alert from "@/components/generic/Alert";
 import AdForm from "@/components/Resources/forms/AdForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import AuthContext from "@/lib/context";
-import { ads, users } from "@/utils/mockApi";
 import React, { useContext, useLayoutEffect, useState } from "react";
 
 function Ads() {
@@ -49,12 +49,16 @@ function Ads() {
   const { token } = useContext(AuthContext)
   const [enableToEdit, setenableToEdit] = useState<Boolean>(false)
   const [isLoading, setisLoading] = useState(true)
+  const [ads, setAds] = useState([])
 
   useLayoutEffect(() => {
     if (token) getDepartements().then((departements) => {
         setisLoading(false)
          if (departements.length > 0) {
-            setenableToEdit(true)
+           setenableToEdit(true)
+           getAds().then((ads) => {
+             setAds(ads)
+           })
         }
          else {
             setenableToEdit(false)
@@ -73,7 +77,7 @@ function Ads() {
       {enableToEdit === false ? <div className="mx-4 mt-5">
         <Alert text={' لا يمكنك اضافة الاعلانات  يرجى اضافة الفروع'} variants='INFO' />
       </div> :
-        <ResourceManager columns={columns} data={ads} resourceName={"اعلان"}>
+        <ResourceManager addrow={create_ads} editRow={update_ads} deleteRow={delete_ads} columns={columns} data={ads} resourceName={"اعلان"}>
           <AdForm />
         </ResourceManager>
       }
