@@ -11,13 +11,14 @@ interface SelectProps {
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
     options: Option[]
     name: string
+    multiple?: boolean
 }
 
-const Select:React.FC<SelectProps> = ({name, labelTitle, id, onChange, options})=>{
+const Select:React.FC<SelectProps> = ({name, labelTitle, id, onChange, options, multiple=false})=>{
   return (
       <div className='my-2 flex flex-col gap-4 w-full'>
           <label htmlFor={id}> {labelTitle} </label>
-          <select name={name} onChange={onChange} className="border border-gray-300 rounded-xl p-2 outline-none">
+          <select multiple={multiple} name={name} onChange={onChange} className="border border-gray-300 rounded-xl p-2 outline-none">
               {
                 options.map((option, index)=>{
                   return (

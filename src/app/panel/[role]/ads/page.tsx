@@ -13,7 +13,7 @@ function Ads() {
     {
       headerName: "id",
       field: "id",
-      width: "50px",
+      width: "70px",
       suppressSizeToFit: true,
     },
     {
@@ -64,8 +64,13 @@ function Ads() {
          if (departements.length > 0) {
            setenableToEdit(true)
            getAds().then((ads) => {
-             
-             setAds(ads)
+             const new_ads = ads.map((ad:any,index:number) => {
+               return {
+                 id: index + 1,
+                 ...ad
+               }
+             })
+             setAds(new_ads)
            })
         }
          else {
