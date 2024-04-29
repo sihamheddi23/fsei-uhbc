@@ -9,6 +9,12 @@ export const ROLES = {
     'HeadDepartement': 'رئيس القسم',
 }
 
+export const ADS = {
+    'FACULTY' : "الكلية",
+    'DEPARTEMENT' : "الفرع",
+    "NEWS" : "الأخبار"
+}
+
 export const GRADES_TEACHER = {
     'MAA': 'رتبة استاد مساعد أ',
     'MAB': 'رتبة استاد مساعد ب',

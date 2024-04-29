@@ -130,14 +130,22 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
       } else {
         let formData: { [name: string]: { value: any } } = {};
         const form: any = e.currentTarget.childNodes.item(0).childNodes;
-        form.forEach((item: any) => {
-          const name: string = item.childNodes.item(1).name;
-          const value: any = item.childNodes.item(1).value;
-          formData[name] = value;
-        });
-        const result = await addrow(formData, token);
-        console.log(result.error);
         
+        form.forEach((item: any) => {
+          const file = item.querySelectorAll("input[type='file']");
+          if (file.length > 0) {
+            const name: string = file[0].name;
+            const value: any = file[0].files[0];
+            formData[name] = value;
+          }
+          else {
+            const name: string = item.childNodes.item(1).name;
+            const value: any = item.childNodes.item(1).value;
+            formData[name] = value;
+          }
+        });
+        
+        const result = await addrow(formData, token);
         if (result.error) {
             console.log(result?.message);
             toast.error(result?.message.join(" , "), {
@@ -166,7 +174,6 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
           window.location.reload();
         }
       }
-
   }
 
   const onSubmitUpdate = async (e: React.FormEvent<HTMLFormElement>) => {

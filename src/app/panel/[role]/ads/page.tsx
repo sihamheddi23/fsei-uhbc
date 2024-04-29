@@ -5,6 +5,7 @@ import Alert from "@/components/generic/Alert";
 import AdForm from "@/components/Resources/forms/AdForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import AuthContext from "@/lib/context";
+import { FACULTY_API_BASE_ENDPOINT } from "@/utils/const";
 import React, { useContext, useLayoutEffect, useState } from "react";
 
 function Ads() {
@@ -27,16 +28,22 @@ function Ads() {
       headerName: "رؤية الملف المرفق",
       field: "document_url",
       cellRenderer: (props: any) => {
-        return (
-          <a
+        return (<div>
+          {
+            props.data.document_url ?  <a
             className="text-blue-500 flex gap-1 items-center"
-            href={props.data.document_url}
+            href={FACULTY_API_BASE_ENDPOINT+"/"+props.data.document_url}
             target="_blank"
             rel="noopener noreferrer"
           >
             <i className="fa fa-eye"></i>
              <span>عرض الملف</span>
-          </a>
+            </a> :
+            <span className="text-center">لا يوجد ملف</span>
+          }
+        </div>
+          
+
         );
       }
     },
@@ -57,6 +64,7 @@ function Ads() {
          if (departements.length > 0) {
            setenableToEdit(true)
            getAds().then((ads) => {
+             
              setAds(ads)
            })
         }

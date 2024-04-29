@@ -13,8 +13,11 @@ export const create_ads = async (input: any, token: string) => {
     formData.append("title", input.title);
     formData.append("description", input.description);
     formData.append("type", input.type);
-    formData.append("document_pdf", input.file[0]);
-
+    formData.append("document_pdf", input.document_pdf);
+    if (input.type === "DEPARTEMENT") {
+       formData.append("departement_id", input.departement_id);
+    }
+    
     const response = await fetch(GET_ADS_ENDPOINT, {
         method: "POST",
         headers: {
@@ -32,8 +35,10 @@ export const update_ads = async (token: string, input: any, id: number | string)
     formData.append("title", input.title);
     formData.append("description", input.description);
     formData.append("type", input.type);
-    formData.append("document_pdf", input.file[0]);
-
+    formData.append("document_pdf", input.document_pdf);
+    if (input.type === "DEPARTEMENT") {
+       formData.append("departement_id", input.departement_id);
+    }
     const UPDATE_ADS_ENDPOINT = `${GET_ADS_ENDPOINT}/${id}`
     const response = await fetch(UPDATE_ADS_ENDPOINT, {
         method: "PATCH",
