@@ -1,10 +1,10 @@
 "use client";
 import { getSubMajors } from "@/api-fetchers/sub-majors";
+import { createSubject, deleteSubject, getSubjects, updateSubject } from "@/api-fetchers/subjects";
 import Alert from "@/components/generic/Alert";
 import SubjectForm from "@/components/Resources/forms/SubjectForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import AuthContext from "@/lib/context";
-import { teachers } from "@/utils/mockApi";
 import { useContext, useLayoutEffect, useState } from "react";
 
 function Subject() {
@@ -31,18 +31,22 @@ function Subject() {
     },
     {
       headerName: "الاسم الكامل للاستاد ",
-      field: "full_name",
+      field: "full_name_teacher",
     },
   ];
   const { token } = useContext(AuthContext)
   const [enableToEdit, setenableToEdit] = useState<Boolean>(false)
   const [isLoading, setisLoading] = useState(true)
+  const [subjects, setsubjects] = useState([])
 
   useLayoutEffect(() => {
     if (token) getSubMajors().then((submajors) => {
         setisLoading(false)
-         if (submajors.length > 0) {
-            setenableToEdit(true)
+         if (submajors.length > 0) {   
+           setenableToEdit(true)
+           getSubjects().then((subjects) => {
+             setsubjects(subjects)
+           })
         }
          else {
             setenableToEdit(false)
@@ -60,7 +64,8 @@ function Subject() {
       {enableToEdit === false ? <div className="mx-4 mt-5">
         <Alert text={' لا يمكنك اضافة المقاييس المدروسة  يرجى اضافة التخصصات'} variants='INFO' />
       </div> :
-        <ResourceManager columns={columns} data={teachers} resourceName={"مقياس"}>
+        <ResourceManager columns={columns} data={subjects} addrow={createSubject}
+          editRow={updateSubject} deleteRow={deleteSubject} resourceName={"مقياس"}>
           <SubjectForm />
         </ResourceManager>}
     </div>

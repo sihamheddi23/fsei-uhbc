@@ -1,16 +1,33 @@
+import { getSubMajors } from '@/api-fetchers/sub-majors'
+import { getTeachers } from '@/api-fetchers/teacher'
 import Input from '@/components/generic/Input'
 import Select from '@/components/generic/Select'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function SubjectForm() {
-  const submajors = [
-    { value: 1, label: 'الأخبار' },
-    { value: 2, label: 'اعلان خاص بالكلية' },
-    { value: 3, label: 'اعلان خاص بالفرع' },
-  ]
+  const [submajorsOptions, setSubmajorsOptions] = useState([])
+  const [teachersOptions, setTeachersOptions] = useState([])
+
+  useEffect(() => {
+   getSubMajors().then((submajors) => {
+    const sb = submajors.map((submajor:any) => {
+      return { value: submajor.id, label: submajor.name+" - "+submajor.level }
+    })
+    setSubmajorsOptions(sb)
+   })
+   
+   getTeachers().then((teachers) => {
+    const t = teachers.map((teacher:any) => {
+      return { value: teacher.id, label: teacher.first_name+" "+teacher.last_name }
+    })
+    setTeachersOptions(t)
+   })
+  }, [])
+ 
   return (
     <div>
       <Input
+        errors={[]}
         labelTitle=" اسم مقياس"
         type="text"
         name="name"
@@ -18,16 +35,16 @@ function SubjectForm() {
         placeholder="اسم مقياس"
       />
       <Select
+        name='sub_major_id'
         labelTitle=" التخصص و المستوى"
         id="submajors"
-        options={submajors}
-        onChange={() => {}}
+        options={submajorsOptions}
       />
       <Select
+        name='teacher_id'
         labelTitle=" الاسم الكامل للاستاد "
-        id="submajors"
-        options={submajors}
-        onChange={() => {}}
+        id="teachers"
+        options={teachersOptions}
       />
     </div>
   )
