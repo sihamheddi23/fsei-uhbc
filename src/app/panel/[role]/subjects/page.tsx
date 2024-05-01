@@ -45,7 +45,13 @@ function Subject() {
          if (submajors.length > 0) {   
            setenableToEdit(true)
            getSubjects().then((subjects) => {
-             setsubjects(subjects)
+             const s = subjects.map((subject:any,index:number) => {
+               return {
+                 id: index + 1,
+                 ...subject,
+                }
+             })
+             setsubjects(s)
            })
         }
          else {

@@ -11,14 +11,14 @@ function SubjectForm() {
   useEffect(() => {
    getSubMajors().then((submajors) => {
     const sb = submajors.map((submajor:any) => {
-      return { value: submajor.id, label: submajor.name+" - "+submajor.level }
+      return { value: submajor._id, label: submajor.name+" - "+submajor.level }
     })
     setSubmajorsOptions(sb)
    })
    
    getTeachers().then((teachers) => {
     const t = teachers.map((teacher:any) => {
-      return { value: teacher.id, label: teacher.first_name+" "+teacher.last_name }
+      return { value: teacher._id, label: teacher.first_name+" "+teacher.last_name }
     })
     setTeachersOptions(t)
    })

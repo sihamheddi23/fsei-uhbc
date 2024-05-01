@@ -1,17 +1,25 @@
+import { getSubMajors } from "@/api-fetchers/sub-majors";
 import FileDragDropUploader from "@/components/generic/FileUploader";
 import Input from "@/components/generic/Input";
 import Select from "@/components/generic/Select";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function ScheduleForm() {
-  const submajors = [
-    { value: 1, label: "الأخبار" },
-    { value: 2, label: " اعلان خاص بالكلية" },
-    { value: 3, label: " اعلان خاص بالفرع" },
-  ];
+  const [submajorsOptions, setSubmajorsOptions] = useState([])
+  useEffect(() => {
+   getSubMajors().then((submajors) => {
+    const sb = submajors.map((submajor:any) => {
+      return { value: submajor._id, label: submajor.name+" - "+submajor.level }
+    })
+     
+    setSubmajorsOptions(sb)
+   })
+  }, [])
+  
   return (
     <div>
       <Input
+        errors={[]}
         labelTitle=" العنوان"
         type="text"
         name="title"
@@ -19,13 +27,13 @@ function ScheduleForm() {
         placeholder=" العنوان"
       />
       <Select
+        name="sub_major_id"
         labelTitle=" التخصص و المستوى"
         id="submajors"
-        options={submajors}
-        onChange={() => {}}
+        options={submajorsOptions}
       />
       <FileDragDropUploader
-        name="document"
+        name="document_pdf"
         fileTypes={["jpeg", "pdf", "png", "JPEG", "jpg", "PDF", "PNG", "JPG"]}
       />
     </div>

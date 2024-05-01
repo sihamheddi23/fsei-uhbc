@@ -7,27 +7,28 @@ export async function getSubjects() {
 }
 
 export function createSubject(input: any, token: string) {
-    console.log(input);
+    const { teacher_id, sub_major_id } = input
     const response = fetch(SUBJECTS_ENDPOINT, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(input),
+        body: JSON.stringify({...input, teacher_id: +teacher_id, sub_major_id: +sub_major_id}),
     });
     return response;
 }
 
 export function updateSubject(token: string, input: any, id: string | number) {
     const UPDATE_SUBJECTS_ENDPOINT = `${SUBJECTS_ENDPOINT}/${id}`;
+    const { teacher_id, sub_major_id } = input
     const response = fetch(UPDATE_SUBJECTS_ENDPOINT, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(input),
+        body: JSON.stringify({...input, teacher_id: +teacher_id, sub_major_id: +sub_major_id}),
     });
     return response;
 }

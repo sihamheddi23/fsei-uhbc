@@ -2,6 +2,7 @@
 import { getAds, create_ads, delete_ads, update_ads } from "@/api-fetchers/ads";
 import { getDepartements } from "@/api-fetchers/departements";
 import Alert from "@/components/generic/Alert";
+import ShowFile from "@/components/generic/ShowFile";
 import AdForm from "@/components/Resources/forms/AdForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
 import AuthContext from "@/lib/context";
@@ -27,25 +28,7 @@ function Ads() {
     {
       headerName: "رؤية الملف المرفق",
       field: "document_url",
-      cellRenderer: (props: any) => {
-        return (<div>
-          {
-            props.data.document_url ?  <a
-            className="text-blue-500 flex gap-1 items-center"
-            href={FACULTY_API_BASE_ENDPOINT+"/"+props.data.document_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fa fa-eye"></i>
-             <span>عرض الملف</span>
-            </a> :
-            <span className="text-center">لا يوجد ملف</span>
-          }
-        </div>
-          
-
-        );
-      }
+      cellRenderer: ShowFile
     },
     {
       headerName: "اسم الفرع",
