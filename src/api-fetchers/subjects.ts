@@ -6,6 +6,17 @@ export async function getSubjects() {
     return data;
 }
 
+export async function getSubjectsByTeacher(token: string) {
+    const response = await fetch(`${SUBJECTS_ENDPOINT}/teacher`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    const data = await response.json();
+    return data;
+}
+
+
 export function createSubject(input: any, token: string) {
     const { teacher_id, sub_major_id } = input
     const response = fetch(SUBJECTS_ENDPOINT, {

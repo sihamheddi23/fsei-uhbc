@@ -17,3 +17,7 @@ export const GET_ADS_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/ads`;
 export const SUBJECTS_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/subject`;
 
 export const SCHEDULES = `${FACULTY_API_BASE_ENDPOINT}/schedule`
+
+export const COURSES_ENDPOINT = `${FACULTY_API_BASE_ENDPOINT}/course`
+export const GET_COURSES_FOR_AUTH_USERS = `${COURSES_ENDPOINT}/teacher`
+export const GET_COURSES_BY_SUBJECT = `${COURSES_ENDPOINT}/subject`

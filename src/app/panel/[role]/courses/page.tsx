@@ -1,10 +1,10 @@
 "use client";
+import { createCourse, deleteCourse, getCoursesByAuthTeacher, updateCourse } from "@/api-fetchers/course";
+import ShowFile from "@/components/generic/ShowFile";
 import CourseForm from "@/components/Resources/forms/CourseForm";
-import ScheduleForm from "@/components/Resources/forms/ScheduleForm";
-import UserForm from "@/components/Resources/forms/userForm";
 import ResourceManager from "@/components/Resources/ResourceManager";
-import { submajors, users } from "@/utils/mockApi";
-import React from "react";
+import AuthContext from "@/lib/context";
+import React, { useContext, useEffect, useState } from "react";
 
 function Schedules() {
   const columns = [
@@ -25,25 +25,24 @@ function Schedules() {
     {
       headerName: "رؤية الملف المرفق",
       field: "document_url",
-      cellRenderer: (props: any) => {
-        return (
-          <a
-            className="text-blue-500 flex gap-1 items-center"
-            href={props.data.document_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fa fa-eye"></i>
-             <span>عرض الملف</span>
-          </a>
-        );
-      }
+      cellRenderer: ShowFile
     },
   ];
+  const [courses, setCourses] = useState()
+  const { token } = useContext(AuthContext)
+  
+  useEffect(() => {
+     if (token) {
+          getCoursesByAuthTeacher(token).then((courses) => {
+            setCourses(courses)
+        })
+     }
+  }, [])
+  
 
   return (
     <div>
-      <ResourceManager columns={columns} data={submajors} resourceName={" الدرس"}>
+      <ResourceManager columns={columns} data={courses} addrow={createCourse} editRow={updateCourse} deleteRow={deleteCourse} resourceName={" الدرس"}>
         <CourseForm />
       </ResourceManager>
     </div>
