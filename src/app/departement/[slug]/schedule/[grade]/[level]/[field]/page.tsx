@@ -3,12 +3,12 @@ import { DEPARTEMENTS, FIELDS, GRADES, LEVELS, MODULES } from '@/utils/const'
 import React from 'react'
 
 function Page({ params }: { params: { slug: string, grade: string, level: string, field: string, module: string } }) {
-  const { slug, grade, level, field, module } = params;
+  const { grade, level, field } = params;
 
   return (
     <div className='m-8 '>
       <div className='text-xl '>
-        <span className='text-blue-500'>{GRADES[grade]} / {LEVELS[level]} </span> / <span>  {FIELDS[field]}</span>
+        <span className='text-blue-500'>{GRADES[grade as keyof typeof GRADES]} / {LEVELS[level as keyof typeof LEVELS]} </span> / <span>  {FIELDS[field as keyof typeof FIELDS]}</span>
       </div>
       <div className='w-full flex flex-col gap-3 my-8'>
         <DocumentInfo title={" جدول التوقيت السداسي الأول"} description={""}/>

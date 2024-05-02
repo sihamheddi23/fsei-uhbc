@@ -8,7 +8,7 @@ function Page({ params }: { params: { slug: string, grade: string, level: string
   return (
     <div className='m-8 '>
       <div className='text-xl '>
-        <span className='text-blue-500'>{DEPARTEMENTS[slug]} / {GRADES[grade]} / {LEVELS[level]} /  {FIELDS[field]} </span> / <span>{MODULES[module]}</span>
+        <span className='text-blue-500'>{DEPARTEMENTS[slug as keyof typeof DEPARTEMENTS]} / {GRADES[grade as keyof typeof GRADES]} / {LEVELS[level as keyof typeof LEVELS]} /  {FIELDS[field as keyof typeof FIELDS]} </span> / <span>{MODULES[module as keyof typeof MODULES]}</span>
       </div>
       <div className='w-full flex flex-col gap-3 my-8'>
         <DocumentInfo title={"المحاضرة الاولى"} description={"هذا النص هو مثال لنص يمكن ان يستبدل في نفس المساحة"}/>
