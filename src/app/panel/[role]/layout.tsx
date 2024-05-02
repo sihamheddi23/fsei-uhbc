@@ -3,7 +3,7 @@ import ContextProvider from '@/lib/contextProvider'
 import { ROLES } from '@/utils/const'
 
 function layout(props:any) {
-  const role:string = ROLES[props.params.role]  
+  const role:string = ROLES[props.params.role as keyof typeof ROLES]  
   return (
     <div className="h-screen my-7 p-3 ">
       <h1 className="text-center font-bold text-2xl">لوحة التحكم - {role}</h1>
