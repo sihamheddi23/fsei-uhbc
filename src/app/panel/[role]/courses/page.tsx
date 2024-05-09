@@ -33,7 +33,9 @@ function Schedules() {
   
   useEffect(() => {
      if (token) {
-          getCoursesByAuthTeacher(token).then((courses) => {
+       getCoursesByAuthTeacher(token).then((courses) => {
+            console.log(courses);
+            
             setCourses(courses)
         })
      }
