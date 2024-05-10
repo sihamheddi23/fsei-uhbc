@@ -159,34 +159,34 @@ const ResourceManager: React.FC<ResourceManagerProps> = ({
       
       const result = await addrow(formData, token);
       
-      // if (result) {
-      //   if (result.error) {
-      //     toast.error(result?.message.join(" , "), {
-      //       position: "top-right",
-      //       autoClose: 5000,
-      //       hideProgressBar: true,
-      //       closeOnClick: true,
-      //       pauseOnHover: true,
-      //       draggable: false,
-      //       progress: undefined,
-      //       theme: "colored",
-      //     });
-      //   }
-      //   else {
-      //     closeModal("ADD");
-      //     toast.success("لقد تمت العملية بنجاح", {
-      //       position: "top-right",
-      //       autoClose: 5000,
-      //       hideProgressBar: true,
-      //       closeOnClick: true,
-      //       pauseOnHover: true,
-      //       draggable: false,
-      //       progress: undefined,
-      //       theme: "colored",
-      //     });
-      //     window.location.reload();
-      //   }
-      // }
+      if (result) {
+        if (result.error) {
+          toast.error(result?.message.join(" , "), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+        else {
+          closeModal("ADD");
+          toast.success("لقد تمت العملية بنجاح", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+          window.location.reload();
+        }
+      }
     }
   };
 
